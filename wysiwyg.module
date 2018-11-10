@@ -205,8 +205,8 @@ function wysiwyg_process_form(&$form) {
             if ($profile) {
               $settings[$format]['editor'] = $profile->editor;
               $settings[$format]['status'] = (int) wysiwyg_user_get_status($profile);
-              if (isset($profile->settings['show_toggle'])) {
-                $settings[$format]['toggle'] = (int) $profile->settings['show_toggle'];
+              if (isset($profile->preferences['show_toggle'])) {
+                $settings[$format]['toggle'] = (int) $profile->preferences['show_toggle'];
               }
               // Check editor theme (and reset it if not/no longer available).
               $theme = wysiwyg_get_editor_themes($profile, (isset($profile->settings['theme']) ? $profile->settings['theme'] : ''));
