@@ -541,7 +541,7 @@ function wysiwyg_profile_overview() {
       'description' => (isset($editor['error']) ? $editor['error'] : ''),
     );
     if (isset($editor['error'])) {
-      $severity = REQUIREMENT_ERROR;
+      $status[$name]['severity'] = REQUIREMENT_ERROR;
     }
     elseif ($editor['installed']) {
       $editor_options[$name] = check_plain($editor['title']) . ' ' . check_plain($editor['installed version']);
