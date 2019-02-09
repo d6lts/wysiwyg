@@ -15,8 +15,8 @@ define('WYSIWYG_CKEDITOR_ACF_CUSTOM', 2);
 function wysiwyg_ckeditor_editor() {
   $editor['ckeditor'] = array(
     'title' => 'CKEditor',
-    'vendor url' => 'http://ckeditor.com',
-    'download url' => 'http://ckeditor.com/download',
+    'vendor url' => 'https://ckeditor.com',
+    'download url' => 'https://ckeditor.com/download',
     'libraries' => array(
       '' => array(
         'title' => 'Default',
@@ -32,7 +32,7 @@ function wysiwyg_ckeditor_editor() {
       ),
     ),
     'install note callback' => 'wysiwyg_ckeditor_install_note',
-    'verified version range' => array('3.0', '4.9.2.95e5d83'),
+    'verified version range' => array('3.0', '4.11.2.7f3189e'),
     'migrate settings callback' => 'wysiwyg_ckeditor_migrate_settings',
     'version callback' => 'wysiwyg_ckeditor_version',
     'themes callback' => 'wysiwyg_ckeditor_themes',
