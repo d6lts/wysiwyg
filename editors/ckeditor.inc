@@ -444,6 +444,9 @@ function wysiwyg_ckeditor_settings_form_validate_stylessets($element, &$form_sta
  *   script is loaded.
  */
 function wysiwyg_ckeditor_init($editor) {
+  // Pass Drupal's JS cache-busting string via settings along to CKEditor.
+  drupal_add_js(array('wysiwyg' => array('ckeditor' => array('timestamp' => variable_get('css_js_query_string', '0')))), 'setting');
+
   // CKEditor unconditionally searches for its library filename in SCRIPT tags
   // on the page upon loading the library in order to determine the base path to
   // itself. When JavaScript aggregation is enabled, this search fails and all
