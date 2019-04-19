@@ -737,7 +737,7 @@ function formatChanged(event) {
   // When changing to a text format that has an editor associated with it, then
   // first ask for confirmation, because switching text formats might cause
   // certain markup to be stripped away.
-  if (($field.val().length > 0 ||  _internalInstances[fieldId].publicInstance.getContent().length > 0) && currentField.formats[newFormat] && currentField.formats[newFormat].editor !== 'none') {
+  if ($field.val().length > 0 && currentField.formats[newFormat] && currentField.formats[newFormat].editor !== 'none') {
     var message = Drupal.t('Are you sure you want to change the text format?\n\nChanging the text format to @text_format and enabling the associated editor will permanently remove content that is not allowed in both text formats.\n\nCancel and save your changes before switching the text format to avoid losing data.', {
       '@text_format': $radio.parent().text()
     });
