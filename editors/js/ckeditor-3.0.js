@@ -76,7 +76,42 @@ Drupal.wysiwyg.editor.attach.ckeditor = function(context, params, settings) {
   if (!settings.height) {
     settings.height = $('#' + params.field).height();
   }
+  // Handler for any change-related event.
+  function changed(ev) {
+    instanceMap[ev.editor.name].contentsChanged();
+  }
   settings.on = {
+    // Versions 4.x has a change event, 3.x does not.
+    change: function (ev) {
+      changed(ev);
+    },
+    contentDom: function (ev) {
+      if (CKEDITOR.version.split('.')[0] == '3') {
+        ev.editor.on('key', function (ev) {
+          // Do not capture modifiers.
+          if (ev.data.ctrlKey || ev.data.metaKey)
+            return;
+
+          var keyCode = ev.data.keyCode;
+          // Filter out movement keys and related.
+          if (keyCode == 8 || keyCode == 13 || keyCode == 32
+            || (keyCode >= 46 && keyCode <= 90) || (keyCode >= 96 && keyCode <= 111)
+            || (keyCode >= 186 && keyCode <= 222) || keyCode == 229) {
+            changed(ev);
+          }
+        });
+        ev.editor.on('paste', changed);
+        ev.editor.on('saveSnapshot', function (ev) {
+          if (instanceMap[ev.editor.name].firstSaveSnapshot) {
+            // The first save snapshot event is triggered when the editor is
+            // focused and before anything has changed.
+            instanceMap[ev.editor.name].firstSaveSnapshot = false;
+            return;
+          }
+          changed(ev);
+        });
+      }
+    },
     instanceReady: function(ev) {
       var editor = ev.editor;
       // Get a list of block, list and table tags from CKEditor's XHTML DTD.
@@ -206,6 +241,10 @@ Drupal.wysiwyg.editor.detach.ckeditor = function (context, params, trigger) {
 };
 
 Drupal.wysiwyg.editor.instance.ckeditor = {
+
+  // Flag indicating if the first save snapshot event has fired.
+  firstSaveSnapshot: true,
+
   addPlugin: function (pluginName, pluginSettings) {
     CKEDITOR.plugins.add(pluginName, {
       // Wrap Drupal plugin in a proxy plugin.
