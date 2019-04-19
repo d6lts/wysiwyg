@@ -710,8 +710,9 @@ function wysiwyg_get_editor_config($profile, $theme) {
  * This assumes that the content editing area only needs stylesheets defined
  * for the scope 'theme'.
  *
- * Performs a background request of a dummy page to cache as many of a theme's
- * stylesheets as possible before returning the cached list.
+ * When the stylesheets a theme uses are not yet known it will return a single
+ * URL pointing to a page which will gather the stylesheets so they can be
+ * loaded indirectly via import rules.
  *
  * Note: if set to explicitly use the current admin theme by name, no access
  * check on the 'view the administration theme' permission is performed.
@@ -750,15 +751,11 @@ function wysiwyg_get_css($theme = NULL) {
   $update_cache = strpos(current_path(), 'wysiwyg_theme/') === FALSE && (
     !$cached || (
       empty($cached->data[$theme])
-      || $cached->data[$theme]['aggregated'] != variable_get('preprocess_css', FALSE))
-      || $cached->data['_css_js_query_string'] != variable_get('css_js_query_string'));
+      || $cached->data[$theme]['aggregated'] !== variable_get('preprocess_css', FALSE))
+      || $cached->data['_css_js_query_string'] !== variable_get('css_js_query_string'));
   if ($update_cache) {
-    $url = url('wysiwyg_theme/' . $theme, array('absolute' => TRUE, 'max_redirects' => 0));
-    $response = drupal_http_request($url);;
-    $cached = cache_get('wysiwyg_css');
-    if ($cached && !empty($cached->data[$theme])) {
-      $css = $cached->data[$theme]['files'];
-    }
+    // Make the client perform another request to update css caches.
+    $css[] = url('wysiwyg_theme/' . $theme, array('absolute' => TRUE));
   }
   elseif (!empty($cached->data[$theme])) {
     $css = $cached->data[$theme]['files'];
