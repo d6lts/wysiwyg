@@ -74,6 +74,9 @@ Drupal.wysiwyg.editor.attach.tinymce = function(context, params, settings) {
     });
     $('#' + ed.editorContainer + ' table.mceLayout td.mceToolbar').append($toolbar);
     $('#' + ed.editorContainer + ' table.mceToolbar').remove();
+    ed.onChange.add(function (ed) {
+      ed._drupalWysiwygInstance.contentsChanged();
+    });
   });
 
   // Remove TinyMCE's internal mceItem class, which was incorrectly added to

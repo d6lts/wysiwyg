@@ -14,13 +14,20 @@
  *   An object containing editor settings for all enabled editor themes.
  */
 Drupal.wysiwyg.editor.attach.none = function(context, params, settings) {
+  var $field = this.$field;
   if (params.resizable) {
-    $('#' + params.field, context).addClass('resizable');
-    $('#' + params.field, context).css({display: ''});
+    $field.addClass('resizable').css({display: ''});
     if (Drupal.behaviors.textarea) {
       Drupal.behaviors.textarea(context);
     }
   }
+  // This helper looks for changes on the supplied element and notifies Wysiwyg
+  // when contents have changed. If the editor provides equivalent events it is
+  // sufficient to call this.contentsChanged() directly on such events. Multiple
+  // helpers may be added and can put conditions on when the notification is
+  // actually passed along to Wysiwyg. All watchers are removed automatically
+  // after an instance is destroyed, or by calling this.stopWatching().
+  this.startWatching($field);
 };
 
 /**
@@ -48,9 +55,20 @@ Drupal.wysiwyg.editor.attach.none = function(context, params, settings) {
  */
 Drupal.wysiwyg.editor.detach.none = function (context, params, trigger) {
   if (trigger != 'serialize') {
-    var $textarea = $('#' + params.field, context).removeClass('textarea-processed').removeClass('resizable');
-    var $div = $textarea.parents('div.resizable-textarea');
-    $div.before($textarea);
+    // This will be called before any editor instances exist.
+    var $field = $('#' + params.field, context);
+    // Store the unaltered content so it can be restored if no changes
+    // intentionally made by the user were detected, such as those caused by
+    // WYSIWYG editors when initially parsing and loading content.
+    $field.attr('data-wysiwyg-value-original', $field.val()).attr('data-wysiwyg-value-is-changed', 'false');
+    // Switch to using any pre-filtered content if it exists.
+    if ($field.attr('data-wysiwyg-value-filtered')) {
+      // Pre-filtered content is only valid once.
+      $field.val($field.attr('data-wysiwyg-value-filtered')).removeAttr('data-wysiwyg-value-filtered');
+    }
+    $field.removeClass('textarea-processed').removeClass('resizable');
+    var $div = $field.parents('div.resizable-textarea');
+    $div.before($field);
     $div.remove();
   }
 };
