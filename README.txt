@@ -1,52 +1,79 @@
+CONTENTS OF THIS FILE
+---------------------
 
--- SUMMARY --
-
-Wysiwyg API allows users of your site to use WYSIWYG/rich-text, and other
-client-side editors for editing contents. This module depends on third-party
-editor libraries, most often based on JavaScript.
-
-For a full description visit the project page:
-  http://drupal.org/project/wysiwyg
-Bug reports, feature suggestions and latest developments:
-  http://drupal.org/project/issues/wysiwyg
+ * Introduction
+ * Installation
+ * Configuration
+ * Support requests
+ * Maintainers
 
 
--- REQUIREMENTS --
+INTRODUCTION
+------------
 
-* None.
+Wysiwyg API allows users of your site to use WYSIWYG/rich-text,
+and other client-side editors for editing contents. This module
+depends on third-party editor libraries, most often based on JavaScript.
 
-
--- INSTALLATION --
-
-* Install as usual, see http://drupal.org/node/70151 for further information.
-
-* Go to Administer > Site configuration > Wysiwyg, and follow the displayed
-  installation instructions to download and install one of the supported
-  editors.
+For a full description of the module, visit the project page:
+https://drupal.org/project/wysiwyg
 
 
--- CONFIGURATION --
+INSTALLATION
+------------
 
-* Go to Administer > Site configuration > Input formats and
+ * Install as usual, see
+   https://drupal.org/node/70151
 
-  - either configure the Full HTML format, assign it to trusted roles, and
-    disable "HTML filter", "Line break converter", and (optionally) "URL filter".
-
-  - or add a new input format, assign it to trusted roles, and ensure that above
-    mentioned input filters are disabled.
-
-* Setup editor profiles in Administer > Site configuration > Wysiwyg.
+ * Go to Administer » Site configuration » Wysiwyg profiles, and follow the
+   displayed installation instructions to download and install one of the
+   supported editors.
 
 
--- CONTACT --
+CONFIGURATION
+-------------
+
+ * Go to Administer » Site configuration » Input formats, and
+
+   - either configure the Full HTML format, assign it to trusted roles, and
+     disable "Limit allowed HTML tags", "Convert line breaks...", and
+     (optionally) "Convert URLs into links".
+     Note that disabling "Limit allowed HTML tags" will allow users to post
+     anything, including potentially malicious content. For a more configurable
+     alternative to "Limit allowed HTML tags" try
+     https://drupal.org/project/wysiwyg_filter.
+
+   - or add a new text format, assign it to trusted roles, and ensure that above
+     mentioned input filters are configured as detailed.
+
+ * Setup editor profiles in Administer » Site configuration » Wysiwyg.
+
+
+SUPPORT REQUESTS
+----------------
+
+Before posting a support request, carefully read the installation
+instructions provided in module documentation page.
+
+Before posting a support request, check Recent log entries at
+admin/reports/dblog
+
+Once you have done this, you can post a support request at module issue queue:
+https://drupal.org/project/issues/wysiwyg
+
+When posting a support request, please inform if you were able to see any errors
+at admin/reports/dblog in Recent log entries.
+
+
+MAINTAINERS
+-----------
 
 Current maintainers:
-* Daniel F. Kudwien (sun) - http://drupal.org/user/54136
-* Henrik Danielsson (TwoD) - http://drupal.org/user/244227
+ * Daniel F. Kudwien (sun) - https://drupal.org/user/54136
+ * Henrik Danielsson (TwoD) - https://drupal.org/user/244227
 
 This project has been sponsored by:
-* UNLEASHED MIND
-  Specialized in consulting and planning of Drupal powered sites, UNLEASHED
-  MIND offers installation, development, theming, customization, and hosting
-  to get you started. Visit http://www.unleashedmind.com for more information.
-
+ * UNLEASHED MIND
+   Specialized in consulting and planning of Drupal powered sites, UNLEASHED
+   MIND offers installation, development, theming, customization, and hosting
+   to get you started. Visit http://www.unleashedmind.com for more information.
