@@ -82,6 +82,12 @@ function _wysiwyg_filter_editor_styles(&$elements) {
   if (strpos(current_path(), 'wysiwyg_theme/') !== 0) {
     return $elements;
   }
+  // Remove any styles that aren't CSS_THEME before processing.
+  foreach ($elements['#items'] as $key => $css) {
+    if (isset($css['group']) && $css['group'] !== CSS_THEME) {
+      unset($elements['#items'][$key]);
+    }
+  }
   $context = array('theme' => $theme_key);
   drupal_alter('wysiwyg_editor_styles', $elements, $context);
   return $elements;
@@ -108,9 +114,6 @@ function _wysiwyg_pre_render_styles($elements) {
   }
   $cached = cache_get('wysiwyg_css');
   foreach (element_children($elements) as $child) {
-    if (isset($elements['#groups'][$child]['group']) && $elements['#groups'][$child]['group'] != CSS_THEME) {
-      continue;
-    }
     switch ($elements[$child]['#tag']) {
       case 'link':
         $css[] = $elements[$child]['#attributes']['href'];
