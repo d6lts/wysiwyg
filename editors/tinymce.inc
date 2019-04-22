@@ -187,6 +187,7 @@ function wysiwyg_tinymce_settings_form(&$form, &$form_state) {
       'paste_data_images' => FALSE,
       'resize' => TRUE,
       'menu' => NULL,
+      'image_title' => TRUE,
     );
   }
   else {
@@ -385,6 +386,13 @@ function wysiwyg_tinymce_settings_form(&$form, &$form_state) {
       '#default_value' => $settings['image_advtab'],
       '#return_value' => 1,
       '#description' => t('Enable the advanced tab in the image dialog.') . ' ' . _wysiwyg_tinymce_get_plugin_setting_description('image', 'image_advtab'),
+    );
+    $form['image']['image_title'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Show title input'),
+      '#default_value' => $settings['image_title'],
+      '#return_value' => TRUE,
+      '#description' => t('Enable the image title in the image dialog.') . ' ' . _wysiwyg_tinymce_get_plugin_setting_description('image', 'image_title'),
     );
 
     if (version_compare($version, '4.0.13', '>=')) {
@@ -733,6 +741,11 @@ function wysiwyg_tinymce_settings($editor, $config, $theme) {
       'theme_advanced_toolbar_location' => 'top',
     );
   }
+  else {
+    $settings += array(
+      'image_title' => TRUE,
+    );
+  }
   $check_if_set = array(
     'block_formats',
     'apply_source_formatting',
@@ -741,6 +754,7 @@ function wysiwyg_tinymce_settings($editor, $config, $theme) {
     'convert_fonts_to_spans',
     'font_styles_merge',
     'image_advtab',
+    'image_title',
     'indent',
     'language',
     'paste_as_text',
