@@ -977,6 +977,28 @@ function ElementWatcher() {
   };
 }
 
+Drupal.wysiwyg.utilities = {
+
+  /**
+   * Perform any actions needed to make editors work in fullscreen mode.
+   *
+   * @see Drupal.wysiwyg.utilities.onFullscreenExit()
+   */
+  onFullscreenEnter: function () {
+    $('#toolbar, #admin-menu', Drupal.overlayChild ? window.parent.document : document).hide();
+  },
+
+  /**
+   * Undo any actions performed when going to fullscreen mode.
+   *
+   * @see Drupal.wysiwyg.utilities.onFullscreenEnter()
+   */
+  onFullscreenExit: function () {
+    $('#toolbar, #admin-menu', Drupal.overlayChild ? window.parent.document : document).show();
+  }
+
+};
+
 // A few hacks to handle AHAH, only needed in D6.
 if (Drupal.ahah) {
   // The version of jquery.form.js shipped with D6 tries to trigger an event

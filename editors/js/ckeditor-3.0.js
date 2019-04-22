@@ -69,7 +69,6 @@ Drupal.wysiwyg.editor.attach.ckeditor = function(context, params, settings) {
   // Apply editor instance settings.
   CKEDITOR.config.customConfig = '';
 
-  var $drupalToolbars = $('#toolbar, #admin-menu', Drupal.overlayChild ? window.parent.document : document);
   if (!settings.height) {
     settings.height = $('#' + params.field).height();
   }
@@ -208,10 +207,10 @@ Drupal.wysiwyg.editor.attach.ckeditor = function(context, params, settings) {
         return;
       }
       if (ev.data.command.state == CKEDITOR.TRISTATE_ON) {
-        $drupalToolbars.hide();
+        Drupal.wysiwyg.utilities.onFullscreenEnter();
       }
       else {
-        $drupalToolbars.show();
+        Drupal.wysiwyg.utilities.onFullscreenExit();
       }
     },
 

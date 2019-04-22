@@ -11,15 +11,14 @@ Drupal.wysiwyg.editor.init.tinymce = function(settings, pluginInfo) {
     tinymce.query = '';
   }
   // Fix Drupal toolbar obscuring editor toolbar in fullscreen mode.
-  var $drupalToolbars = $('#toolbar, #admin-menu', Drupal.overlayChild ? window.parent.document : document);
   tinyMCE.onAddEditor.add(function (mgr, ed) {
     if (ed.id == 'mce_fullscreen') {
-      $drupalToolbars.hide();
+      Drupal.wysiwyg.utilities.onFullscreenEnter();
     }
   });
   tinyMCE.onRemoveEditor.add(function (mgr, ed) {
     if (ed.id == 'mce_fullscreen') {
-      $drupalToolbars.show();
+      Drupal.wysiwyg.utilities.onFullscreenExit();
     }
     else {
       // Free our reference to the private instance to not risk memory leaks.
