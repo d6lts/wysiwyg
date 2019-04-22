@@ -800,7 +800,8 @@ function wysiwyg_tinymce_settings($editor, $config, $theme) {
 
   if (isset($config['css_setting'])) {
     if ($config['css_setting'] == 'theme') {
-      $settings['content_css'] = implode(',', wysiwyg_get_css(isset($config['css_theme']) ? $config['css_theme'] : ''));
+      $css_files = wysiwyg_get_css(isset($config['css_theme']) ? $config['css_theme'] : '');
+      $settings['content_css'] = version_compare($version, '3.5b3', '>=') ? $css_files : implode(',', $css_files);
     }
     elseif ($config['css_setting'] == 'self' && isset($config['css_path'])) {
       $settings['content_css'] = strtr($config['css_path'], array(
