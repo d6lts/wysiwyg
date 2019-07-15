@@ -84,7 +84,7 @@ function _wysiwyg_filter_editor_styles(&$elements) {
   }
   // Remove any styles that aren't CSS_THEME before processing.
   foreach ($elements['#items'] as $key => $css) {
-    if (isset($css['group']) && $css['group'] !== CSS_THEME) {
+    if ($css['media'] === 'print' || (isset($css['group']) && $css['group'] !== CSS_THEME)) {
       unset($elements['#items'][$key]);
     }
   }
