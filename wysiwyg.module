@@ -292,6 +292,21 @@ function wysiwyg_pre_render_text_format($element) {
       wysiwyg_add_editor_settings($profile, $theme);
     }
   }
+
+  // Store the unaltered content so it can be restored if no changes
+  // intentionally made by the user were detected, such as those caused by
+  // WYSIWYG editors when initially parsing and loading content.
+  if (!empty($element['value']['#value'])) {
+    $original = $element['value']['#value'];
+    $element['value']['#attributes']['data-wysiwyg-value-original'] = $original;
+    $element['value']['#attributes']['data-wysiwyg-value-is-changed'] = 'false';
+  }
+  if (!empty($element['summary']['#value']) && $element['summary']['#type'] === 'textarea') {
+    $original = $element['summary']['#value'];
+    $element['summary']['#attributes']['data-wysiwyg-value-original'] = $original;
+    $element['summary']['#attributes']['data-wysiwyg-value-is-changed'] = 'false';
+  }
+
   $element['value']['#attributes']['class'][] = 'wysiwyg';
   $element['#attached']['js'][] = array(
     'data' => array(

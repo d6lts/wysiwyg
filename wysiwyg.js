@@ -437,7 +437,10 @@ function WysiwygInternalInstance(params) {
  * Notify Wysiwyg that the editor contents for this instance have changed.
  */
 WysiwygInternalInstance.prototype.contentsChanged = function () {
-  this.$field.attr('data-wysiwyg-value-is-changed', (this.status ? 'true' : 'false'));
+  // Only need to flip changed status once.
+  if (this.$field.attr('data-wysiwyg-value-is-changed') === 'false') {
+    this.$field.attr('data-wysiwyg-value-is-changed', 'true');
+  }
   this.$field.trigger('drupal-wysiwyg-changed', this.publicInstance);
 };
 
@@ -712,8 +715,8 @@ function detachFromField(mainFieldId, context, trigger, params) {
     Drupal.wysiwyg.editor.detach[editor].call(_internalInstances[fieldId], context, stateParams, trigger);
   }
   // Restore the original value of the user didn't make any changes yet.
-  if ($field.attr('data-wysiwyg-value-is-changed') === 'false') {
-      $field.val($field.attr('data-wysiwyg-value-original'));
+  if (enabled && $field.attr('data-wysiwyg-value-is-changed') === 'false') {
+    $field.val($field.attr('data-wysiwyg-value-original'));
   }
   if (trigger == 'unload' && _internalInstances[fieldId]) {
     _internalInstances[fieldId].stopWatching();
