@@ -217,6 +217,16 @@ function wysiwyg_process_form(&$form) {
               wysiwyg_add_editor_settings($profile, $theme);
             }
           }
+
+          // Store the unaltered content so it can be restored if no changes
+          // intentionally made by the user were detected, such as those caused by
+          // WYSIWYG editors when initially parsing and loading content.
+          if (!empty($field['#value'])) {
+            $original = $field['#value'];
+            $field['#attributes']['data-wysiwyg-value-original'] = $original;
+            $field['#attributes']['data-wysiwyg-value-is-changed'] = 'false';
+          }
+
           // Tag this field to make it easier to find on the client.
           if (empty($field['#attributes']['class'])) {
             $field['#attributes']['class'] = 'wysiwyg';

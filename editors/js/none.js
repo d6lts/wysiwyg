@@ -57,15 +57,6 @@ Drupal.wysiwyg.editor.detach.none = function (context, params, trigger) {
   if (trigger != 'serialize') {
     // This will be called before any editor instances exist.
     var $field = $('#' + params.field, context);
-    // Store the unaltered content so it can be restored if no changes
-    // intentionally made by the user were detected, such as those caused by
-    // WYSIWYG editors when initially parsing and loading content.
-    $field.attr('data-wysiwyg-value-original', $field.val()).attr('data-wysiwyg-value-is-changed', 'false');
-    // Switch to using any pre-filtered content if it exists.
-    if ($field.attr('data-wysiwyg-value-filtered')) {
-      // Pre-filtered content is only valid once.
-      $field.val($field.attr('data-wysiwyg-value-filtered')).removeAttr('data-wysiwyg-value-filtered');
-    }
     $field.removeClass('textarea-processed').removeClass('resizable');
     var $div = $field.parents('div.resizable-textarea');
     $div.before($field);
