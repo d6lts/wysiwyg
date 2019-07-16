@@ -14,7 +14,7 @@ function wysiwyg_tinymce_editor() {
   $editor['tinymce'] = array(
     'title' => 'TinyMCE',
     'vendor url' => 'https://www.tinymce.com',
-    'download url' => 'https://www.tinymce.com/download',
+    'download url' => 'https://www.tiny.cloud/get-tiny/self-hosted/',
     'library path' => wysiwyg_get_path('tinymce'),
     'libraries' => array(
       '' => array(
@@ -27,7 +27,7 @@ function wysiwyg_tinymce_editor() {
       ),
     ),
     'version callback' => 'wysiwyg_tinymce_version',
-    'verified version range' => array('3.3.9.2', '4.9.4'),
+    'verified version range' => array('3.3.9.2', '4.9.5'),
     'themes callback' => 'wysiwyg_tinymce_themes',
     'settings form callback' => 'wysiwyg_tinymce_settings_form',
     'init callback' => 'wysiwyg_tinymce_init',
