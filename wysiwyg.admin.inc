@@ -76,6 +76,14 @@ function wysiwyg_profile_form($form_state, $profile) {
     ),
   );
 
+  if (!empty($editor['deprecation message'])) {
+    $form['basic']['info']['deprecated'] = array(
+      '#prefix' => '<div class="messages warning">',
+      '#value' => $editor['deprecation message'],
+      '#suffix' => '</div>',
+    );
+  }
+
   $version_verified = $editor['installed version verified'];
   $migrate_message = '';
   $migrate_status = 'status';
@@ -566,7 +574,7 @@ function wysiwyg_profile_overview() {
 
       // Add any install notes.
       if (!empty($editor['install note callback']) && function_exists($editor['install note callback'])) {
-        $instructions .= '<div class="editor-install-note">' . $editor['install note callback']() . '</div>';
+        $instructions .= '<div class="editor-install-note">' . $editor['install note callback']($editor) . '</div>';
       }
 
       $status[$name]['description'] .= $instructions;
@@ -636,6 +644,9 @@ function wysiwyg_profile_overview() {
       }
       else {
         $editor_message = '<div class="messages error">' . t('Unable to find @library. Expected version: %profile_version. Reinstall the library to edit this profile.', array('@library' => $editors[$editor_name]['title'], '%profile_version' => $profile_version)) . '</div>';
+      }
+      if (!empty($editors[$editor_name]['deprecation message'])) {
+        $editor_message .= '<div class="messages warning">' . $editors[$editor_name]['deprecation message'] . '</div>';
       }
       $form['formats'][$id]['editor']['#value'] = $editor_message;
       if ($editors[$profile->editor]['installed']) {
