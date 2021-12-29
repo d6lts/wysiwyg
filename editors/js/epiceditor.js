@@ -16,8 +16,7 @@ Drupal.wysiwyg.editor.attach.epiceditor = function (context, params, settings) {
 
   settings.container = containerId;
   settings.file = {
-    defaultContent: defaultContent,
-    autoSave: 0
+    defaultContent: defaultContent
   };
   settings.theme = {
     preview: '/themes/preview/preview-dark.css',
