@@ -148,7 +148,7 @@ function wysiwyg_ckeditor_migrate_settings(&$settings, $editor, $profile_version
 function wysiwyg_ckeditor_install_note() {
   $output = '<p class="warning">' . t('Do NOT download the "CKEditor for Drupal" edition.') . '</br>';
   $output .= t('Make sure you install the full package as not all plugins work with the standard package.') . '</p>';
-  $output .= '<p>' . t('@editor is no longer being developed and support will be dropped by Wysiwyg module after May 2022.', ['@editor' => 'CKEditor 3']) . '</p>';
+  $output .= '<p>' . t('@editor is no longer being developed and support will be dropped by Wysiwyg module after May 2022.', array('@editor' => 'CKEditor 3')) . '</p>';
   return $output;
 }
 
@@ -157,7 +157,7 @@ function wysiwyg_ckeditor_install_note() {
  */
 function wysiwyg_ckeditor_deprecation_message($editor) {
   if (!empty($editor['installed version']) && version_compare($editor['installed version'], '4.0.0', '<')) {
-    return t('@editor is no longer being developed and support will be dropped by Wysiwyg module after May 2022.', ['@editor' => 'CKEditor 3']);
+    return t('@editor is no longer being developed and support will be dropped by Wysiwyg module after May 2022.', array('@editor' => 'CKEditor 3'));
   }
   return NULL;
 }
