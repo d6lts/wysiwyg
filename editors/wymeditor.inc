@@ -33,7 +33,7 @@ function wysiwyg_wymeditor_editor() {
       '0.5-rc1' => array(
         'js files' => array('wymeditor.js'),
       ),
-      '1.0.0a1' => array(
+      '1.0.0-rc1' => array(
         'js files' => array('wymeditor-1.js'),
         'css files' => array('wymeditor.css'),
       ),
