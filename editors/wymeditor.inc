@@ -24,6 +24,8 @@ function wysiwyg_wymeditor_editor() {
       ),
     ),
     'verified version range' => array('0.5', '1.1.1'),
+    'deprecation message' => t('@editor is no longer being developed and support will be dropped by Wysiwyg module after May 2022.', ['@editor' => 'WYMeditor']),
+    'install note callback' => 'wysiwyg_deprecation_install_note',
     'version callback' => 'wysiwyg_wymeditor_version',
     'themes callback' => 'wysiwyg_wymeditor_themes',
     'settings form callback' => 'wysiwyg_wymeditor_settings_form',
