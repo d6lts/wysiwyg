@@ -79,11 +79,11 @@ function wysiwyg_profile_form($form_state, $profile) {
   if (!empty($editor['deprecation message'])) {
     $deprecation_message = is_callable($editor['deprecation message']) ? $editor['deprecation message']($editor) : $editor['deprecation message'];
     if (!empty($deprecation_message)) {
-      $form['basic']['info']['deprecated'] = [
+      $form['basic']['info']['deprecated'] = array(
         '#prefix' => '<div class="messages warning">',
         '#value' => $deprecation_message,
         '#suffix' => '</div>',
-      ];
+      );
     }
   }
 

@@ -20,7 +20,7 @@ function wysiwyg_whizzywig_editor() {
       ),
     ),
     'verified version range' => array('55', '63'),
-    'deprecation message' => t('@editor is no longer being developed and support will be dropped by Wysiwyg module after May 2022.', ['@editor' => 'Whizzywig']),
+    'deprecation message' => t('@editor is no longer being developed and support will be dropped by Wysiwyg module after May 2022.', array('@editor' => 'Whizzywig')),
     'install note callback' => 'wysiwyg_deprecation_install_note',
     'version callback' => 'wysiwyg_whizzywig_version',
     'settings form callback' => 'wysiwyg_whizzywig_settings_form',

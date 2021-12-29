@@ -20,7 +20,7 @@ function wysiwyg_nicedit_editor() {
       ),
     ),
     'verified version range' => array('0.9', '0.9'),
-    'deprecation message' => t('@editor is no longer being developed and support will be dropped by Wysiwyg module after May 2022.', ['@editor' => 'NicEdit']),
+    'deprecation message' => t('@editor is no longer being developed and support will be dropped by Wysiwyg module after May 2022.', array('@editor' => 'NicEdit')),
     'install note callback' => 'wysiwyg_deprecation_install_note',
     'version callback' => 'wysiwyg_nicedit_version',
     'settings form callback' => 'wysiwyg_nicedit_settings_form',

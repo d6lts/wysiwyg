@@ -87,7 +87,7 @@ function wysiwyg_tinymce_editor() {
  * Show an install note.
  */
 function wysiwyg_tinymce_install_note($editor) {
-  return '<p>' . t('@editor is no longer being developed and support will be dropped by Wysiwyg module after May 2022.', ['@editor' => 'TinyMCE 3']) . '</p>';
+  return '<p>' . t('@editor is no longer being developed and support will be dropped by Wysiwyg module after May 2022.', array('@editor' => 'TinyMCE 3')) . '</p>';
 }
 
 /**
@@ -95,7 +95,7 @@ function wysiwyg_tinymce_install_note($editor) {
  */
 function wysiwyg_tinymce_deprecation_message($editor) {
   if (!empty($editor['installed version']) && version_compare($editor['installed version'], '4.0', '<')) {
-    return t('@editor is no longer being developed and support will be dropped by Wysiwyg module after May 2022.', ['@editor' => 'TinyMCE 3']);
+    return t('@editor is no longer being developed and support will be dropped by Wysiwyg module after May 2022.', array('@editor' => 'TinyMCE 3'));
   }
   return NULL;
 }
