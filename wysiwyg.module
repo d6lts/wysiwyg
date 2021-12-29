@@ -1324,3 +1324,11 @@ function _wysiwyg_process_include($module, $identifier, $path, $hook) {
  * @} End of "defgroup wysiwyg_api".
  */
 
+/**
+ * Return an install note about deprecation.
+ */
+function wysiwyg_deprecation_install_note($editor) {
+  $output = '<p class="warning">' . $editor['deprecation message'] . '</p>';
+  return $output;
+}
+
