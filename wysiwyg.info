@@ -2,3 +2,9 @@ name = Wysiwyg
 description = Allows users to edit contents with client-side editors.
 package = User interface
 core = 6.x
+
+; Information added by Drupal 6 LTS vendors on 2022-01-05
+version = "6.x-2.11"
+core = "6.x"
+project = "wysiwyg"
+datestamp = "1641424399"
