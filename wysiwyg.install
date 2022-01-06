@@ -499,8 +499,8 @@ function wysiwyg_update_6205() {
  * Delete YUI profiles.
  */
 function wysiwyg_update_6206() {
-  db_delete('wysiwyg')
-    ->condition('editor', 'yui')
-    ->execute();
+  $ret = array();
+  db_query("DELETE FROM {wysiwyg} WHERE editor = 'yui'");
+  return $ret;
 }
 
