@@ -1372,7 +1372,7 @@ function wysiwyg_filter_xss_page_callback() {
   $original_format = !empty($_POST['original_input_format']) ? $_POST['original_input_format'] : NULL;
   if ($original_format !== NULL) {
     $original_format = filter_format_load($original_format);
-    if ($original_format == FALSE || !is_object($original_format) || !filter_access($original_format)) {
+    if ($original_format == FALSE || !is_object($original_format) || !filter_access($original_format->format)) {
       drupal_set_header($_SERVER['SERVER_PROTOCOL'] . ' 403 Forbidden');
       exit;
     }
